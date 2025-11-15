@@ -1,10 +1,10 @@
 package ${package}.${moduleName}.service;
 
-import ${package}.framework.common.utils.PageResult;
-import ${package}.framework.mybatis.service.BaseService;
-import ${package}.${moduleName}.vo.${ClassName}VO;
-import ${package}.${moduleName}.query.${ClassName}Query;
-import ${package}.${moduleName}.entity.${ClassName}Entity;
+import ${package}.framework.base.page.PageInfo;
+import ${package}.${moduleName}.service.BaseService;
+import ${package}.${moduleName}.domain.vo.${ClassName}VO;
+import ${package}.${moduleName}.domain.request.${ClassName}PageReq;
+import ${package}.${moduleName}.domain.entity.${ClassName}Entity;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface ${ClassName}Service extends BaseService<${ClassName}Entity> {
 
-    PageResult<${ClassName}VO> page(${ClassName}Query query);
+    PageInfo<${ClassName}VO> page(${ClassName}PageReq query);
 
     void save(${ClassName}VO vo);
 

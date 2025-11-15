@@ -15,36 +15,48 @@
       "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/controller/${ClassName}Controller.java"
     },
     {
+      "templateName": "java/BaseService.java.ftl",
+      "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/service/BaseService.java"
+    },
+    {
       "templateName": "java/Service.java.ftl",
       "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/service/${ClassName}Service.java"
+    },
+    {
+      "templateName": "java/BaseServiceImpl.java.ftl",
+      "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/service/impl/BaseServiceImpl.java"
     },
     {
       "templateName": "java/ServiceImpl.java.ftl",
       "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/service/impl/${ClassName}ServiceImpl.java"
     },
     {
-      "templateName": "java/Query.java.ftl",
-      "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/query/${ClassName}Query.java"
+      "templateName": "java/PageReq.java.ftl",
+      "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/domain/request/${ClassName}PageReq.java"
     },
     {
       "templateName": "java/Entity.java.ftl",
-      "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/entity/${ClassName}Entity.java"
+      "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/domain/entity/${ClassName}Entity.java"
+    },
+    {
+      "templateName": "java/ExcelDTO.java.ftl",
+      "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/domain/dto/${ClassName}ExcelDTO.java"
     },
     {
       "templateName": "java/VO.java.ftl",
-      "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/vo/${ClassName}VO.java"
+      "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/domain/vo/${ClassName}VO.java"
     },
     {
       "templateName": "java/Convert.java.ftl",
       "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/convert/${ClassName}Convert.java"
     },
     {
-      "templateName": "java/Dao.java.ftl",
-      "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/dao/${ClassName}Dao.java"
+      "templateName": "java/Mapper.java.ftl",
+      "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/dao/${ClassName}Mapper.java"
     },
     {
-      "templateName": "xml/Dao.xml.ftl",
-      "generatorPath": "${backendPath}/src/main/resources/mapper/${moduleName}/${ClassName}Dao.xml"
+      "templateName": "xml/Mapper.xml.ftl",
+      "generatorPath": "${backendPath}/src/main/resources/mapper/${moduleName}/${ClassName}Mapper.xml"
     },
     {
       "templateName": "sql/menu.sql.ftl",

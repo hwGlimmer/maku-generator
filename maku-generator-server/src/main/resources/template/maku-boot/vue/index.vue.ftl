@@ -3,7 +3,7 @@
 		<el-form ref="queryRef" :inline="true" :model="state.queryForm" @keyup.enter="getDataList()">
 		<#list queryList as field>
 			<el-form-item prop="${field.attrName}">
-			<#if field.formType == 'text' || field.formType == 'textarea' || field.formType == 'editor'>
+			<#if field.queryFormType == 'text' || field.queryFormType == 'textarea' || field.queryFormType == 'editor'>
 			  <el-input v-model="state.queryForm.${field.attrName}" placeholder="${field.fieldComment!}"></el-input>
 			<#elseif field.queryFormType == 'select'>
 			  <#if field.queryDict??>
@@ -22,17 +22,23 @@
 			  </el-radio-group>
 			  </#if>
 			<#elseif field.queryFormType == 'date'>
-			  <el-date-picker
-				v-model="daterange"
-				type="daterange"
-				value-format="yyyy-MM-dd">
-			  </el-date-picker>
-			<#elseif field.queryFormType == 'datetime'>
-			  <el-date-picker
-				v-model="datetimerange"
-				type="datetimerange"
-				value-format="yyyy-MM-dd HH:mm:ss">
-			  </el-date-picker>
+                <el-date-picker
+                        v-model="queryFormModel.${field.attrName}"
+                        type="daterange"
+                        format="YYYY-MM-DD"
+                        value-format="YYYY-MM-DD"
+                        clearable
+                >
+                </el-date-picker>
+            <#elseif field.queryFormType == 'datetime'>
+                <el-date-picker
+                        v-model="queryFormModel.${field.attrName}"
+                        type="datetimerange"
+                        format="YYYY-MM-DD HH:mm:ss"
+                        value-format="YYYY-MM-DD HH:mm:ss"
+                        clearable
+                >
+                </el-date-picker>
 			<#else>
 			  <el-input v-model="state.queryForm.${field.attrName}" placeholder="${field.fieldComment!}"></el-input>
 			</#if>

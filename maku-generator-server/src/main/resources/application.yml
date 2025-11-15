@@ -7,9 +7,9 @@ spring:
   datasource:
     # MySQL
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/maku_generator?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true
-    username: maku
-    password: 123456
+    url: jdbc:mysql://localhost:3406/gen_config_db?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true
+    username: root
+    password: root
     # Oracle
     #    driver-class-name: oracle.jdbc.OracleDriver
     #    url: jdbc:oracle:thin:@localhost:1521:xe

@@ -1,7 +1,7 @@
 package ${package}.${moduleName}.convert;
 
-import ${package}.${moduleName}.entity.${ClassName}Entity;
-import ${package}.${moduleName}.vo.${ClassName}VO;
+import ${package}.${moduleName}.domain.entity.${ClassName}Entity;
+import ${package}.${moduleName}.domain.vo.${ClassName}VO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

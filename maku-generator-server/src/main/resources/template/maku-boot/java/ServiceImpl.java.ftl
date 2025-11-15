@@ -4,18 +4,19 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import lombok.AllArgsConstructor;
-import ${package}.framework.common.utils.PageResult;
-import ${package}.framework.mybatis.service.impl.BaseServiceImpl;
+import ${package}.framework.base.page.PageInfo;;
 import ${package}.${moduleName}.convert.${ClassName}Convert;
-import ${package}.${moduleName}.entity.${ClassName}Entity;
-import ${package}.${moduleName}.query.${ClassName}Query;
-import ${package}.${moduleName}.vo.${ClassName}VO;
-import ${package}.${moduleName}.dao.${ClassName}Dao;
+import ${package}.${moduleName}.domain.entity.${ClassName}Entity;
+import ${package}.${moduleName}.domain.request.${ClassName}PageReq;
+import ${package}.${moduleName}.domain.vo.${ClassName}VO;
+import ${package}.${moduleName}.dao.${ClassName}Mapper;
 import ${package}.${moduleName}.service.${ClassName}Service;
+import ${package}.${moduleName}.service.impl.BaseServiceImpl;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import  ${package}.framework.util.PageUtils;
 
 import java.util.List;
 
@@ -27,20 +28,29 @@ import java.util.List;
  */
 @Service
 @AllArgsConstructor
-public class ${ClassName}ServiceImpl extends BaseServiceImpl<${ClassName}Dao, ${ClassName}Entity> implements ${ClassName}Service {
+public class ${ClassName}ServiceImpl extends BaseServiceImpl<${ClassName}Mapper, ${ClassName}Entity> implements ${ClassName}Service {
 
     @Override
-    public PageResult<${ClassName}VO> page(${ClassName}Query query) {
+    public PageInfo<${ClassName}VO> page(${ClassName}PageReq query) {
         IPage<${ClassName}Entity> page = baseMapper.selectPage(getPage(query), getWrapper(query));
 
-        return new PageResult<>(${ClassName}Convert.INSTANCE.convertList(page.getRecords()), page.getTotal());
+        List<${ClassName}VO> list = ${ClassName}Convert.INSTANCE.convertList(page.getRecords());
+
+        // 分页对象-构建
+        PageInfo<${ClassName}VO> pageInfo = PageUtils.build(
+            Integer.valueOf((int) page.getCurrent()), Integer.valueOf((int) page.getSize()), list, page.getTotal()
+            );
+
+        return pageInfo;
     }
 
-    private LambdaQueryWrapper<${ClassName}Entity> getWrapper(${ClassName}Query query){
+    private LambdaQueryWrapper<${ClassName}Entity> getWrapper(${ClassName}PageReq query){
         LambdaQueryWrapper<${ClassName}Entity> wrapper = Wrappers.lambdaQuery();
         <#list queryList as field>
             <#if field.queryFormType == 'date' || field.queryFormType == 'datetime'>
         wrapper.between(ArrayUtils.isNotEmpty(query.get${field.attrName?cap_first}()), ${ClassName}Entity::get${field.attrName?cap_first}, ArrayUtils.isNotEmpty(query.get${field.attrName?cap_first}()) ? query.get${field.attrName?cap_first}()[0] : null, ArrayUtils.isNotEmpty(query.get${field.attrName?cap_first}()) ? query.get${field.attrName?cap_first}()[1] : null);
+            <#elseif field.attrType == 'Integer' || field.attrType == 'Long' || field.attrType == 'Double' || field.attrType == 'BigDecimal'>
+        wrapper.eq(query.get${field.attrName?cap_first}() != null, ${ClassName}Entity::get${field.attrName?cap_first}, query.get${field.attrName?cap_first}());
             <#elseif field.queryType == '='>
         wrapper.eq(StringUtils.isNotEmpty(query.get${field.attrName?cap_first}()), ${ClassName}Entity::get${field.attrName?cap_first}, query.get${field.attrName?cap_first}());
             <#elseif field.queryType == '!='>

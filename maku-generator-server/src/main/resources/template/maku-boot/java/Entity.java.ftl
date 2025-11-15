@@ -1,4 +1,4 @@
-package ${package}.${moduleName}.entity;
+package ${package}.${moduleName}.domain.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
