@@ -18,7 +18,7 @@ public interface ${ClassName}Service extends BaseService<${ClassName}Entity> {
 
     PageInfo<${ClassName}VO> page(${ClassName}PageReq query);
 
-    void save(${ClassName}VO vo);
+    ${ClassName}Entity save(${ClassName}VO vo);
 
     void update(${ClassName}VO vo);
 

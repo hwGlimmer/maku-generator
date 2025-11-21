@@ -75,10 +75,12 @@ public class ${ClassName}ServiceImpl extends BaseServiceImpl<${ClassName}Mapper,
     }
 
     @Override
-    public void save(${ClassName}VO vo) {
+    public ${ClassName}Entity save(${ClassName}VO vo) {
         ${ClassName}Entity entity = ${ClassName}Convert.INSTANCE.convert(vo);
 
         baseMapper.insert(entity);
+
+        return entity;
     }
 
     @Override

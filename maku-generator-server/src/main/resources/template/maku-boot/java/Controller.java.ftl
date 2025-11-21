@@ -48,10 +48,10 @@ public class ${ClassName}Controller {
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "${tableComment!}-保存")
-    public ApiResult<String> save(@RequestBody ${ClassName}VO vo){
-        ${className}Service.save(vo);
+    public ApiResult<${ClassName}VO> save(@Valid @RequestBody ${ClassName}VO vo){
+        ${ClassName}Entity entity =  ${className}Service.save(vo);
 
-        return ApiResult.ok();
+        return ApiResult.ok(${ClassName}Convert.INSTANCE.convert(entity));
     }
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
