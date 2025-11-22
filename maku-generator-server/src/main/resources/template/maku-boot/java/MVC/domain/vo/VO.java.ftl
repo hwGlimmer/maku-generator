@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiModelProperty;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import java.io.Serializable;
-import ${package}.biz.constant.BizConstant;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 <#list importList as i>
@@ -28,10 +27,10 @@ public class ${ClassName}VO implements Serializable {
 	@ApiModelProperty(value = "${field.fieldComment}")
 	</#if>
 	<#if field.fieldType == 'date'>
-	@JsonFormat(pattern = BizConstant.DATE_PATTERN)
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	</#if>
 	<#if field.fieldType == 'datetime'>
-	@JsonFormat(pattern = BizConstant.DATE_TIME_PATTERN)
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	</#if>
 	<#if field.formRequired?? && field.formRequired>
     	<#if field.attrType == 'String'>

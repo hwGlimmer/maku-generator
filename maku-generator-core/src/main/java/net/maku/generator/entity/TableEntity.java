@@ -52,6 +52,12 @@ public class TableEntity {
      * 生成方式  1：zip压缩包   2：自定义目录
      */
     private Integer generatorType;
+
+    /**
+     * 架构模式  0：MVC   1：DDD
+     */
+    private Integer designPattern;
+
     /**
      * 后端生成路径
      */

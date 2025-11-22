@@ -1,7 +1,7 @@
 package ${package}.${moduleName}.service;
 
 import ${package}.framework.base.page.PageInfo;
-import ${package}.${moduleName}.service.BaseService;
+import ${package}.common.service.BaseService;
 import ${package}.${moduleName}.domain.vo.${ClassName}VO;
 import ${package}.${moduleName}.domain.request.${ClassName}PageReq;
 import ${package}.${moduleName}.domain.entity.${ClassName}Entity;

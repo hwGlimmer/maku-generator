@@ -135,6 +135,7 @@ CREATE TABLE "maku_generator"."gen_table" (
 	"package_name" character varying(200 char) NULL,
 	"version" character varying(200 char) NULL,
 	"generator_type" tinyint NULL,
+	"design_pattern" tinyint NULL,
 	"backend_path" character varying(500 char) NULL,
 	"frontend_path" character varying(500 char) NULL,
 	"module_name" character varying(200 char) NULL,

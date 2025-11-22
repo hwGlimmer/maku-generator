@@ -11,7 +11,7 @@ import ${package}.${moduleName}.domain.request.${ClassName}PageReq;
 import ${package}.${moduleName}.domain.vo.${ClassName}VO;
 import ${package}.${moduleName}.dao.${ClassName}Mapper;
 import ${package}.${moduleName}.service.${ClassName}Service;
-import ${package}.${moduleName}.service.impl.BaseServiceImpl;
+import ${package}.common.service.impl.BaseServiceImpl;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -28,7 +28,7 @@ import java.util.List;
  */
 @Service
 @AllArgsConstructor
-public class ${ClassName}ServiceImpl extends BaseServiceImpl<${ClassName}Mapper, ${ClassName}Entity> implements ${ClassName}Service {
+public class ${ClassName}ServiceImpl extends BaseServiceImpl<${ClassName}Mapper, ${ClassName}Entity, ${ClassName}PageReq> implements ${ClassName}Service {
 
     @Override
     public PageInfo<${ClassName}VO> page(${ClassName}PageReq query) {

@@ -46,7 +46,7 @@ public class GeneratorServiceImpl implements GeneratorService {
     private final TableFieldService tableFieldService;
 
     @Override
-    public void downloadCode(Long tableId, ZipOutputStream zip) {
+    public void downloadCode(Long tableId, ZipOutputStream zip, Set<String> entryies) {
         // 数据模型
         Map<String, Object> dataModel = getDataModel(tableId);
 
@@ -59,14 +59,31 @@ public class GeneratorServiceImpl implements GeneratorService {
             String content = TemplateUtils.getContent(template.getTemplateContent(), dataModel);
             String path = TemplateUtils.getContent(template.getGeneratorPath(), dataModel);
 
+            // 检查是否已添加过相同路径的条目
+            if (entryies.contains(path)) {
+                log.warn("跳过重复条目: {}", path);
+                continue;
+            }
+
+            ZipEntry zipEntry = null;
             try {
                 // 添加到zip
-                zip.putNextEntry(new ZipEntry(path));
+                zipEntry = new ZipEntry(path);
+                zip.putNextEntry(zipEntry);
                 IoUtil.writeUtf8(zip, false, content);
-                zip.flush();
-                zip.closeEntry();
+                // 记录已添加的条目
+                entryies.add(path);
             } catch (IOException e) {
+                log.error("模板写入失败，路径：{}", path, e);
                 throw new ServerException("模板写入失败：" + path, e);
+            } finally {
+                if (zipEntry != null) {
+                    try {
+                        zip.closeEntry();
+                    } catch (IOException e) {
+                        log.warn("关闭ZIP条目失败：{}", path, e);
+                    }
+                }
             }
         }
     }

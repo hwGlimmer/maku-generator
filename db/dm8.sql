@@ -69,6 +69,7 @@ CREATE TABLE gen_table
     package_name   varchar(200),
     version        varchar(200),
     generator_type int,
+    design_pattern int,
     backend_path   varchar(500),
     frontend_path  varchar(500),
     module_name    varchar(200),

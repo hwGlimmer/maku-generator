@@ -1,7 +1,6 @@
-package ${package}.${moduleName}.service;
+package ${package}.common.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-
 import java.util.List;
 
 /**

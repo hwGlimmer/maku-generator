@@ -16,4 +16,7 @@ public class GeneratorProperties {
      * 模板路径
      */
     private String template = "/template/";
+
+    private String configFileName = "config_mvc.json";
+
 }

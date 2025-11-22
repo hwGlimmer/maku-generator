@@ -22,7 +22,7 @@ public class GeneratorAutoConfiguration {
 
     @Bean
     GeneratorConfig generatorConfig() {
-        return new GeneratorConfig(properties.getTemplate());
+        return new GeneratorConfig(properties.getTemplate(), properties.getConfigFileName());
     }
 
 }

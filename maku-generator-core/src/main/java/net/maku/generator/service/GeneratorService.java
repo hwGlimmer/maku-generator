@@ -2,7 +2,9 @@ package net.maku.generator.service;
 
 import net.maku.generator.vo.PreviewVO;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.zip.ZipOutputStream;
 
 /**
@@ -13,7 +15,7 @@ import java.util.zip.ZipOutputStream;
  */
 public interface GeneratorService {
 
-    void downloadCode(Long tableId, ZipOutputStream zip);
+    void downloadCode(Long tableId, ZipOutputStream zip, Set<String> entryies);
 
     void generatorCode(Long tableId);
 

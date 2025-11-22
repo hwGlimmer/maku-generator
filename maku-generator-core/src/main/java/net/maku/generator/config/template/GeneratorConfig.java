@@ -17,9 +17,11 @@ import java.nio.charset.StandardCharsets;
  */
 public class GeneratorConfig {
     private String template;
+    private String configFileName;
 
-    public GeneratorConfig(String template) {
+    public GeneratorConfig(String template, String configFileName) {
         this.template = template;
+        this.configFileName = configFileName;
     }
 
     public GeneratorInfo getGeneratorConfig() {
@@ -29,9 +31,9 @@ public class GeneratorConfig {
         }
 
         // 模板配置文件
-        InputStream isConfig = this.getClass().getResourceAsStream(template + "config.json");
+        InputStream isConfig = this.getClass().getResourceAsStream(template + configFileName);
         if (isConfig == null) {
-            throw new ServerException("模板配置文件，config.json不存在");
+            throw new ServerException("模板配置文件，" + configFileName + "不存在");
         }
 
         try {
@@ -51,7 +53,7 @@ public class GeneratorConfig {
             }
             return generator;
         } catch (IOException e) {
-            throw new ServerException("读取config.json配置文件失败");
+            throw new ServerException("读取" + configFileName + "配置文件失败");
         }
     }
 }

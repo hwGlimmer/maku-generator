@@ -9,7 +9,9 @@ import net.maku.generator.vo.PreviewVO;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.ByteArrayOutputStream;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.zip.ZipOutputStream;
 
 /**
@@ -32,9 +34,12 @@ public class GeneratorController {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ZipOutputStream zip = new ZipOutputStream(outputStream);
 
+        // 在 download 方法中维护全局的已添加条目集合
+        Set<String> globalAddedEntries = new HashSet<>();
+
         // 生成代码
         for (String tableId : tableIds.split(",")) {
-            generatorService.downloadCode(Long.parseLong(tableId), zip);
+            generatorService.downloadCode(Long.parseLong(tableId), zip, globalAddedEntries);
         }
 
         IoUtil.close(zip);

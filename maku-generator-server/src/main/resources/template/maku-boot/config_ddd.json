@@ -1,0 +1,51 @@
+{
+  "project": {
+    "packageName": "net.maku",
+    "version": "1.0.0",
+    "backendPath": "D:\\generator\\maku-boot\\maku-server",
+    "frontendPath": "D:\\generator\\maku-admin"
+  },
+  "developer": {
+    "author": "阿沐",
+    "email": "babamu@126.com"
+  },
+  "templates": [
+    {
+      "templateName": "java/common/exception/ErrorCode.java.ftl",
+      "generatorPath": "${backendPath}/src/main/java/${packagePath}/common/exception/ErrorCode.java"
+    },
+    {
+      "templateName": "java/common/exception/ServerException.java.ftl",
+      "generatorPath": "${backendPath}/src/main/java/${packagePath}/common/exception/ServerException.java"
+    },
+    {
+      "templateName": "java/common/service/BaseService.java.ftl",
+      "generatorPath": "${backendPath}/src/main/java/${packagePath}/common/service/BaseService.java"
+    },
+    {
+      "templateName": "java/common/service/impl/BaseServiceImpl.java.ftl",
+      "generatorPath": "${backendPath}/src/main/java/${packagePath}/common/service/impl/BaseServiceImpl.java"
+    },
+
+    {
+      "templateName": "xml/Mapper.xml.ftl",
+      "generatorPath": "${backendPath}/src/main/resources/mapper/${moduleName}/${ClassName}Mapper.xml"
+    },
+    {
+      "templateName": "sql/menu.sql.ftl",
+      "generatorPath": "${backendPath}/menu/${tableName}_menu.sql"
+    },
+    {
+      "templateName": "vue/api.ts.ftl",
+      "generatorPath": "${frontendPath}/src/api/${moduleName}/${functionName}.ts"
+    },
+    {
+      "templateName": "vue/index.vue.ftl",
+      "generatorPath": "${frontendPath}/src/views/${moduleName}/${functionName}/index.vue"
+    },
+    {
+      "templateName": "vue/add-or-update.vue.ftl",
+      "generatorPath": "${frontendPath}/src/views/${moduleName}/${functionName}/add-or-update.vue"
+    }
+  ]
+}

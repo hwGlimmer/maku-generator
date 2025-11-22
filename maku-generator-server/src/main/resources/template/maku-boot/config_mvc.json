@@ -11,47 +11,55 @@
   },
   "templates": [
     {
-      "templateName": "java/Controller.java.ftl",
+      "templateName": "java/common/exception/ErrorCode.java.ftl",
+      "generatorPath": "${backendPath}/src/main/java/${packagePath}/common/exception/ErrorCode.java"
+    },
+    {
+      "templateName": "java/common/exception/ServerException.java.ftl",
+      "generatorPath": "${backendPath}/src/main/java/${packagePath}/common/exception/ServerException.java"
+    },
+    {
+      "templateName": "java/common/service/BaseService.java.ftl",
+      "generatorPath": "${backendPath}/src/main/java/${packagePath}/common/service/BaseService.java"
+    },
+    {
+      "templateName": "java/common/service/impl/BaseServiceImpl.java.ftl",
+      "generatorPath": "${backendPath}/src/main/java/${packagePath}/common/service/impl/BaseServiceImpl.java"
+    },
+    {
+      "templateName": "java/MVC/controller/Controller.java.ftl",
       "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/controller/${ClassName}Controller.java"
     },
     {
-      "templateName": "java/BaseService.java.ftl",
-      "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/service/BaseService.java"
-    },
-    {
-      "templateName": "java/Service.java.ftl",
+      "templateName": "java/MVC/service/Service.java.ftl",
       "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/service/${ClassName}Service.java"
     },
     {
-      "templateName": "java/BaseServiceImpl.java.ftl",
-      "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/service/impl/BaseServiceImpl.java"
-    },
-    {
-      "templateName": "java/ServiceImpl.java.ftl",
+      "templateName": "java/MVC/service/impl/ServiceImpl.java.ftl",
       "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/service/impl/${ClassName}ServiceImpl.java"
     },
     {
-      "templateName": "java/PageReq.java.ftl",
+      "templateName": "java/MVC/domain/request/PageReq.java.ftl",
       "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/domain/request/${ClassName}PageReq.java"
     },
     {
-      "templateName": "java/Entity.java.ftl",
+      "templateName": "java/MVC/domain/entity/Entity.java.ftl",
       "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/domain/entity/${ClassName}Entity.java"
     },
     {
-      "templateName": "java/ExcelDTO.java.ftl",
+      "templateName": "java/MVC/domain/dto/ExcelDTO.java.ftl",
       "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/domain/dto/${ClassName}ExcelDTO.java"
     },
     {
-      "templateName": "java/VO.java.ftl",
+      "templateName": "java/MVC/domain/vo/VO.java.ftl",
       "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/domain/vo/${ClassName}VO.java"
     },
     {
-      "templateName": "java/Convert.java.ftl",
+      "templateName": "java/MVC/domain/convert/Convert.java.ftl",
       "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/convert/${ClassName}Convert.java"
     },
     {
-      "templateName": "java/Mapper.java.ftl",
+      "templateName": "java/MVC/dao/Mapper.java.ftl",
       "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/dao/${ClassName}Mapper.java"
     },
     {
