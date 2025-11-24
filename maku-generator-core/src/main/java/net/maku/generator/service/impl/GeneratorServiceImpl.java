@@ -51,8 +51,12 @@ public class GeneratorServiceImpl implements GeneratorService {
         Map<String, Object> dataModel = getDataModel(tableId);
 
         // 代码生成器信息
-        GeneratorInfo generator = generatorConfig.getGeneratorConfig();
-
+        TableEntity table = tableService.getById(tableId);
+        GeneratorConfig dynamicConfig = GeneratorConfig.createByDesignPattern(
+                generatorConfig.getTemplate(),
+                table.getDesignPattern()
+        );
+        GeneratorInfo generator = dynamicConfig.getGeneratorConfig();
         // 渲染模板并输出
         for (TemplateInfo template : generator.getTemplates()) {
             dataModel.put("templateName", template.getTemplateName());
@@ -95,8 +99,14 @@ public class GeneratorServiceImpl implements GeneratorService {
         Map<String, Object> dataModel = getDataModel(tableId);
 
         // 代码生成器信息
-        GeneratorInfo generator = generatorConfig.getGeneratorConfig();
-
+        // 从数据模型中获取设计模式
+        Integer designPattern = (Integer) dataModel.get("designPattern");
+        // 代码生成器信息 - 动态配置
+        GeneratorConfig dynamicConfig = GeneratorConfig.createByDesignPattern(
+                generatorConfig.getTemplate(),
+                designPattern
+        );
+        GeneratorInfo generator = dynamicConfig.getGeneratorConfig();
         // 渲染模板并输出
         for (TemplateInfo template : generator.getTemplates()) {
             dataModel.put("templateName", template.getTemplateName());
@@ -120,7 +130,7 @@ public class GeneratorServiceImpl implements GeneratorService {
 
         // 数据模型
         Map<String, Object> dataModel = new HashMap<>();
-
+        dataModel.put("designPattern", table.getDesignPattern());
         // 获取数据库类型
         String dbType = datasourceService.getDatabaseProductName(table.getDatasourceId());
         dataModel.put("dbType", dbType);
@@ -238,7 +248,15 @@ public class GeneratorServiceImpl implements GeneratorService {
     public List<PreviewVO> preview(Long tableId) {
         Map<String, Object> dataModel = getDataModel(tableId);
         // 代码生成器信息
-        GeneratorInfo generator = generatorConfig.getGeneratorConfig();
+        // 从数据模型中获取设计模式
+        Integer designPattern = (Integer) dataModel.get("designPattern");
+
+        // 代码生成器信息 - 动态配置
+        GeneratorConfig dynamicConfig = GeneratorConfig.createByDesignPattern(
+                generatorConfig.getTemplate(),
+                designPattern
+        );
+        GeneratorInfo generator = dynamicConfig.getGeneratorConfig();
         return generator.getTemplates().stream().map(t -> {
             dataModel.put("templateName", t.getTemplateName());
             String content = TemplateUtils.getContent(t.getTemplateContent(), dataModel);

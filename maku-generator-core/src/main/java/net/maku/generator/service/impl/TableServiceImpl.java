@@ -15,6 +15,7 @@ import net.maku.generator.config.template.GeneratorInfo;
 import net.maku.generator.dao.TableDao;
 import net.maku.generator.entity.TableEntity;
 import net.maku.generator.entity.TableFieldEntity;
+import net.maku.generator.enums.DesignTypeEnum;
 import net.maku.generator.enums.FormLayoutEnum;
 import net.maku.generator.enums.GeneratorTypeEnum;
 import net.maku.generator.service.DataSourceService;
@@ -98,6 +99,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableDao, TableEntity> imp
         table.setEmail(generator.getDeveloper().getEmail());
         table.setFormLayout(FormLayoutEnum.ONE.getValue());
         table.setGeneratorType(GeneratorTypeEnum.ZIP_DOWNLOAD.ordinal());
+        table.setDesignPattern(DesignTypeEnum.MVC.ordinal());
         table.setClassName(NamingCase.toPascalCase(tableName));
         table.setModuleName(GenUtils.getModuleName(table.getPackageName()));
         table.setFunctionName(GenUtils.getFunctionName(tableName));

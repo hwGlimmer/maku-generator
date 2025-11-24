@@ -73,6 +73,14 @@
 					</el-form-item>
 				</el-col>
 				<el-col :span="12">
+					<el-form-item label="架构模式" prop="designPattern">
+						<el-radio-group v-model="dataForm.designPattern">
+							<el-radio :label="0">MVC</el-radio>
+							<el-radio :label="1">DDD</el-radio>
+						</el-radio-group>
+					</el-form-item>
+				</el-col>
+				<el-col :span="12">
 					<el-form-item label="表单布局" prop="formLayout">
 						<el-radio-group v-model="dataForm.formLayout">
 							<el-radio :label="1">一列</el-radio>
@@ -112,6 +120,7 @@ const dataForm = reactive({
 	id: '',
 	baseclassId: '',
 	generatorType: 0,
+	designPattern: 0,
 	formLayout: 1,
 	backendPath: '',
 	frontendPath: '',
@@ -160,6 +169,7 @@ const dataRules = ref({
 	moduleName: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
 	functionName: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
 	generatorType: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
+	designPattern: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
 	formLayout: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
 	backendPath: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
 	frontendPath: [{ required: true, message: '必填项不能为空', trigger: 'blur' }]
