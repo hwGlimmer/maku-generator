@@ -1,22 +1,18 @@
 package ${package}.${moduleName}.service.impl;
 
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.AllArgsConstructor;
-import ${package}.framework.base.page.PageInfo;;
-import ${package}.${moduleName}.convert.${ClassName}Convert;
-import ${package}.${moduleName}.domain.entity.${ClassName}Entity;
-import ${package}.${moduleName}.domain.request.${ClassName}PageReq;
-import ${package}.${moduleName}.domain.vo.${ClassName}VO;
+import ${package}.framework.base.page.PageInfo;
+import ${package}.${moduleName}.domain.dto.response.*;
+import ${package}.${moduleName}.domain.dto.request.*;
+import ${package}.${moduleName}.domain.po.*;
 import ${package}.${moduleName}.dao.${ClassName}Mapper;
-import ${package}.${moduleName}.service.${ClassName}Service;
-import ${package}.common.service.impl.BaseServiceImpl;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
+import ${package}.${moduleName}.service.I${ClassName}Service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import  ${package}.framework.util.PageUtils;
+import com.dongbei.cms.framework.util.BeanCopyUtils;
+import com.dongbei.cms.framework.util.CollectionCopyUtils;
 
 import java.util.List;
 
@@ -28,72 +24,56 @@ import java.util.List;
  */
 @Service
 @AllArgsConstructor
-public class ${ClassName}ServiceImpl extends BaseServiceImpl<${ClassName}Mapper, ${ClassName}Entity, ${ClassName}PageReq> implements ${ClassName}Service {
+public class ${ClassName}ServiceImpl extends ServiceImpl<${ClassName}Mapper, ${ClassName}> implements I${ClassName}Service {
 
     @Override
-    public PageInfo<${ClassName}VO> page(${ClassName}PageReq query) {
-        IPage<${ClassName}Entity> page = baseMapper.selectPage(getPage(query), getWrapper(query));
+    public PageInfo<Rsp${ClassName}Dto> query(Req${ClassName}QueryDto query) {
+        Page<${ClassName}> page = new Page<>(query.getCurrent(), query.getSize());
 
-        List<${ClassName}VO> list = ${ClassName}Convert.INSTANCE.convertList(page.getRecords());
+        ${ClassName} ${className} = BeanCopyUtils.copyProperties(query, ${ClassName}::new);
+        List<${ClassName}> ${className}List = baseMapper.selectPageListByCondition(page,${className});
+
+        List<Rsp${ClassName}Dto> list  = CollectionCopyUtils.copy(${className}List, Rsp${ClassName}Dto::new);
 
         // 分页对象-构建
-        PageInfo<${ClassName}VO> pageInfo = PageUtils.build(
+        PageInfo<Rsp${ClassName}Dto> pageInfo = PageUtils.build(
             Integer.valueOf((int) page.getCurrent()), Integer.valueOf((int) page.getSize()), list, page.getTotal()
             );
 
         return pageInfo;
     }
 
-    private LambdaQueryWrapper<${ClassName}Entity> getWrapper(${ClassName}PageReq query){
-        LambdaQueryWrapper<${ClassName}Entity> wrapper = Wrappers.lambdaQuery();
-        <#list queryList as field>
-            <#if field.queryFormType == 'date' || field.queryFormType == 'datetime'>
-        wrapper.between(ArrayUtils.isNotEmpty(query.get${field.attrName?cap_first}()), ${ClassName}Entity::get${field.attrName?cap_first}, ArrayUtils.isNotEmpty(query.get${field.attrName?cap_first}()) ? query.get${field.attrName?cap_first}()[0] : null, ArrayUtils.isNotEmpty(query.get${field.attrName?cap_first}()) ? query.get${field.attrName?cap_first}()[1] : null);
-            <#elseif field.attrType == 'Integer' || field.attrType == 'Long' || field.attrType == 'Double' || field.attrType == 'BigDecimal'>
-        wrapper.eq(query.get${field.attrName?cap_first}() != null, ${ClassName}Entity::get${field.attrName?cap_first}, query.get${field.attrName?cap_first}());
-            <#elseif field.queryType == '='>
-        wrapper.eq(StringUtils.isNotEmpty(query.get${field.attrName?cap_first}()), ${ClassName}Entity::get${field.attrName?cap_first}, query.get${field.attrName?cap_first}());
-            <#elseif field.queryType == '!='>
-        wrapper.ne(StringUtils.isNotEmpty(query.get${field.attrName?cap_first}()), ${ClassName}Entity::get${field.attrName?cap_first}, query.get${field.attrName?cap_first}());
-            <#elseif field.queryType == '>'>
-        wrapper.gt(StringUtils.isNotEmpty(query.get${field.attrName?cap_first}()), ${ClassName}Entity::get${field.attrName?cap_first}, query.get${field.attrName?cap_first}());
-            <#elseif field.queryType == '>='>
-        wrapper.ge(StringUtils.isNotEmpty(query.get${field.attrName?cap_first}()), ${ClassName}Entity::get${field.attrName?cap_first}, query.get${field.attrName?cap_first}());
-            <#elseif field.queryType == '<'>
-        wrapper.lt(StringUtils.isNotEmpty(query.get${field.attrName?cap_first}()), ${ClassName}Entity::get${field.attrName?cap_first}, query.get${field.attrName?cap_first}());
-            <#elseif field.queryType == '<='>
-        wrapper.le(StringUtils.isNotEmpty(query.get${field.attrName?cap_first}()), ${ClassName}Entity::get${field.attrName?cap_first}, query.get${field.attrName?cap_first}());
-            <#elseif field.queryType == 'like'>
-        wrapper.like(StringUtils.isNotEmpty(query.get${field.attrName?cap_first}()), ${ClassName}Entity::get${field.attrName?cap_first}, query.get${field.attrName?cap_first}());
-            <#elseif field.queryType == 'left like'>
-        wrapper.likeLeft(StringUtils.isNotEmpty(query.get${field.attrName?cap_first}()), ${ClassName}Entity::get${field.attrName?cap_first}, query.get${field.attrName?cap_first}());
-            <#elseif field.queryType == 'right like'>
-        wrapper.likeRight(StringUtils.isNotEmpty(query.get${field.attrName?cap_first}()), ${ClassName}Entity::get${field.attrName?cap_first}, query.get${field.attrName?cap_first}());
-            </#if>
-        </#list>
-        return wrapper;
+    @Override
+    public void add(Req${ClassName}AddDto req${ClassName}AddDto) {
+
+        // 属性拷贝
+        ${ClassName} ${className} = BeanCopyUtils.copyProperties(req${ClassName}AddDto, ${ClassName}::new);
+
+        baseMapper.insert(${className});
+
     }
 
     @Override
-    public ${ClassName}Entity save(${ClassName}VO vo) {
-        ${ClassName}Entity entity = ${ClassName}Convert.INSTANCE.convert(vo);
-
-        baseMapper.insert(entity);
-
-        return entity;
-    }
-
-    @Override
-    public void update(${ClassName}VO vo) {
-        ${ClassName}Entity entity = ${ClassName}Convert.INSTANCE.convert(vo);
-
-        updateById(entity);
+    public Rsp${ClassName}Dto detail(Req${ClassName}IdDto req${ClassName}IdDto) {
+        ${ClassName}  ${className} = getById(req${ClassName}IdDto.getId());
+        Rsp${ClassName}Dto rsp${ClassName}Dto = BeanCopyUtils.copyProperties(${className},  Rsp${ClassName}Dto::new);
+        return rsp${ClassName}Dto;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void delete(List<Long> idList) {
-        removeByIds(idList);
+    public void update(Req${ClassName}UpdateDto req${ClassName}UpdateDto) {
+
+        // 属性拷贝
+        ${ClassName} ${className} = BeanCopyUtils.copyProperties(req${ClassName}UpdateDto, ${ClassName}::new);
+
+        updateById(${className});
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void delete(Req${ClassName}IdDto req${ClassName}IdDto) {
+        removeById(reqCmsVacancyPositionIdDto.getId());
     }
 
 }

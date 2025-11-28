@@ -2,19 +2,16 @@ package ${package}.${moduleName}.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import javax.validation.Valid;
 import org.springframework.http.MediaType;
 import ${package}.framework.base.api.ApiResult;
 import ${package}.framework.base.page.PageInfo;
-import ${package}.${moduleName}.convert.${ClassName}Convert;
-import ${package}.${moduleName}.domain.entity.${ClassName}Entity;
-import ${package}.${moduleName}.service.${ClassName}Service;
-import ${package}.${moduleName}.domain.request.${ClassName}PageReq;
-import ${package}.${moduleName}.domain.vo.${ClassName}VO;
+import ${package}.${moduleName}.service.I${ClassName}Service;
+import ${package}.${moduleName}.domain.dto.request.*;
+import ${package}.${moduleName}.domain.dto.response.*;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 /**
@@ -28,44 +25,78 @@ import java.util.List;
 @Api(tags = "${tableComment!}", value = "${tableComment!}")
 @AllArgsConstructor
 public class ${ClassName}Controller {
-    private final ${ClassName}Service ${className}Service;
 
-    @PostMapping(value = "page", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "${tableComment!}-分页查询")
-    public ApiResult<PageInfo<${ClassName}VO>> page(@Valid @RequestBody ${ClassName}PageReq query){
-        PageInfo<${ClassName}VO> page = ${className}Service.page(query);
+    @Autowired
+    private final I${ClassName}Service ${className}Service;
+
+    @ApiOperation(
+            value = "${tableComment!}-分页查询"
+    )
+    @PostMapping(value = "/query", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ApiResult<PageInfo<Rsp${ClassName}Dto>> query(
+        @Valid 
+        @RequestBody Req${ClassName}QueryDto req${ClassName}QueryDto
+    ){
+
+        PageInfo<Rsp${ClassName}Dto> page = ${className}Service.query(req${ClassName}QueryDto);
 
         return ApiResult.ok(page);
     }
 
-    @GetMapping(value ="{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "${tableComment!}-详情")
-    public ApiResult<${ClassName}VO> get(@ApiParam(value = "主键ID") @PathVariable("id") Long id){
-        ${ClassName}Entity entity = ${className}Service.getById(id);
+    @ApiOperation(
+            value = "${tableComment!}-详情"
+    )
+    @PostMapping(value = "/detail", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ApiResult<Req${ClassName}IdDto> get(
+            @Valid
+            @RequestBody Req${ClassName}IdDto req${ClassName}IdDto
+    ){
 
-        return ApiResult.ok(${ClassName}Convert.INSTANCE.convert(entity));
+        Rsp${ClassName}Dto rsp${ClassName}Dto = ${className}Service.detail(req${ClassName}IdDto);
+
+        return ApiResult.ok(rsp${ClassName}Dto);
     }
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "${tableComment!}-保存")
-    public ApiResult<${ClassName}VO> save(@Valid @RequestBody ${ClassName}VO vo){
-        ${ClassName}Entity entity =  ${className}Service.save(vo);
 
-        return ApiResult.ok(${ClassName}Convert.INSTANCE.convert(entity));
-    }
+    @ApiOperation(
+            value = "${tableComment!}-保存"
+    )
+    @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ApiResult add(
+                @Valid
+                @RequestBody Req${ClassName}AddDto  req${ClassName}AddDto
+    ){
 
-    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "${tableComment!}-修改")
-    public ApiResult<String> update(@RequestBody ${ClassName}VO vo){
-        ${className}Service.update(vo);
+        ${className}Service.add(req${ClassName}AddDto);
 
         return ApiResult.ok();
     }
 
-    @DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "${tableComment!}-删除")
-    public ApiResult<String> delete(@ApiParam(value = "主键ID列表") @RequestBody List<Long> idList){
-        ${className}Service.delete(idList);
+
+    @ApiOperation(
+            value = "${tableComment!}-修改"
+    )
+    @PostMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ApiResult update(
+            @Valid
+            @RequestBody Req${ClassName}UpdateDto req${ClassName}UpdateDto
+    ){
+
+        ${className}Service.update(req${ClassName}UpdateDto);
+
+        return ApiResult.ok();
+    }
+
+    @ApiOperation(
+            value = "${tableComment!}-删除"
+    )
+    @PostMapping(value = "/delete", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ApiResult delete(
+            @Valid
+            @RequestBody Req${ClassName}IdDto req${ClassName}IdDto
+    ) {
+
+        ${className}Service.delete(req${ClassName}IdDto);
 
         return ApiResult.ok();
     }

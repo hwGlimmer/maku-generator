@@ -1,4 +1,4 @@
-package ${package}.${moduleName}.domain.vo;
+package ${package}.${moduleName}.domain.dto.response;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -18,8 +18,8 @@ import ${i!};
 * @since ${version} ${date}
 */
 @Data
-@ApiModel(value = "${tableComment}VO")
-public class ${ClassName}VO implements Serializable {
+@ApiModel(value = "Rsp${tableComment}Dto")
+public class Rsp${ClassName}Dto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 <#list fieldList as field>
@@ -40,7 +40,6 @@ public class ${ClassName}VO implements Serializable {
 		</#if>
 	</#if>
 	private ${field.attrType} ${field.attrName};
-
 </#list>
 
 }

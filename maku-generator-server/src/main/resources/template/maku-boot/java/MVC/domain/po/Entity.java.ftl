@@ -1,4 +1,4 @@
-package ${package}.${moduleName}.domain.entity;
+package ${package}.${moduleName}.domain.po;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,7 +19,7 @@ import ${baseClass.packageName}.${baseClass.code};
 <#if baseClass??>@EqualsAndHashCode(callSuper=false)</#if>
 @Data
 @TableName("${tableName}")
-public class ${ClassName}Entity<#if baseClass??> extends ${baseClass.code}</#if> {
+public class ${ClassName}<#if baseClass??> extends ${baseClass.code}</#if> {
 <#list fieldList as field>
 <#if !field.baseField>
 	<#if field.fieldComment!?length gt 0>
