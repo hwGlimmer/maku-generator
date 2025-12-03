@@ -27,7 +27,7 @@
     </sql>
 
     <!-- List query by condition -->
-    <select id="selectPageListByCondition" parameterType="${package}.${moduleName}.domain.po.${ClassName}" resultMap="${className}Map">
+    <select id="selectPageListByCondition" parameterType="${package}.${moduleName}.domain.dto.request.Req${ClassName}QueryDto" resultMap="${className}Map">
         SELECT
             <include refid="Base_Column_List"/>
         FROM ${tableName}

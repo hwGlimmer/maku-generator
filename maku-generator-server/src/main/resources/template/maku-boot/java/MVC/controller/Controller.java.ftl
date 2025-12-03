@@ -47,7 +47,7 @@ public class ${ClassName}Controller {
             value = "${tableComment!}-详情"
     )
     @PostMapping(value = "/detail", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ApiResult<Req${ClassName}IdDto> get(
+    public ApiResult<Rsp${ClassName}Dto> detail(
             @Valid
             @RequestBody Req${ClassName}IdDto req${ClassName}IdDto
     ){

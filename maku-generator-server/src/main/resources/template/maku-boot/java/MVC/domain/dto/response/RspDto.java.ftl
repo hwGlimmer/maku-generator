@@ -32,14 +32,7 @@ public class Rsp${ClassName}Dto implements Serializable {
 	<#if field.fieldType == 'datetime'>
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	</#if>
-	<#if field.formRequired?? && field.formRequired>
-    	<#if field.attrType == 'String'>
-	@NotBlank(message = "${field.fieldComment}不能为空")
-		<#else>
-	@NotNull(message = "${field.fieldComment}不能为空")
-		</#if>
-	</#if>
 	private ${field.attrType} ${field.attrName};
-</#list>
 
+</#list>
 }

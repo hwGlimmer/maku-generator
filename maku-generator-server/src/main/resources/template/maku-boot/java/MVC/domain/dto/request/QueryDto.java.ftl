@@ -21,15 +21,23 @@ import ${i!};
 @ApiModel(value = "${tableComment}查询入参")
 public class Req${ClassName}QueryDto extends ReqPageQueryDto {
 <#list queryList as field>
-    <#if field.fieldComment!?length gt 0>
-    @ApiModelProperty(value =  "${field.fieldComment}")
-    </#if>
-    <#if field.queryFormType == 'date'>
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    <#elseif field.queryFormType == 'datetime'>
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    </#if>
-    private ${field.attrType}<#if field.queryFormType == 'date' || field.queryFormType == 'datetime'>[]</#if> ${field.attrName};
+    <#if field.queryFormType == 'date' || field.queryFormType == 'datetime'>
+        <#if field.fieldComment!?length gt 0>
+    @ApiModelProperty(value =  "${field.fieldComment}开始时间")
+        </#if>
+    private String ${field.attrName}Start;
 
+        <#if field.fieldComment!?length gt 0>
+    @ApiModelProperty(value =  "${field.fieldComment}结束时间")
+        </#if>
+    private String ${field.attrName}End;
+
+    <#else>
+        <#if field.fieldComment!?length gt 0>
+    @ApiModelProperty(value =  "${field.fieldComment}")
+        </#if>
+    private ${field.attrType} ${field.attrName};
+
+    </#if>
 </#list>
 }

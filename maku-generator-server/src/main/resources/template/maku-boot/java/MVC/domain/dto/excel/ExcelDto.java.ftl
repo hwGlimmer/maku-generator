@@ -15,7 +15,7 @@ import com.alibaba.excel.annotation.ExcelProperty;
 */
 @Data
 @ApiModel(value = "${tableComment}ExcelDTO")
-public class ${ClassName}ExcelDTO  {
+public class ${ClassName}ExcelDto  {
 <#-- ----------  BEGIN 字段循环遍历  ---------->
 <#list fieldList as field>
     <#if field.fieldComment!?length gt 0>

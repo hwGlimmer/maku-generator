@@ -40,7 +40,7 @@ public class ${ClassName}<#if baseClass??> extends ${baseClass.code}</#if> {
 	@TableId
 	</#if>
 	private ${field.attrType} ${field.attrName};
-</#if>
 
+</#if>
 </#list>
 }

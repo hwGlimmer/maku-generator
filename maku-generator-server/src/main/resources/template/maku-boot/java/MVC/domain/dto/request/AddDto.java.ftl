@@ -1,12 +1,11 @@
 package ${package}.${moduleName}.domain.dto.request;
 
 import io.swagger.annotations.ApiModel;
-import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import ${package}.framework.base.domain.dto.ReqPageQueryDto;;
-import org.springframework.format.annotation.DateTimeFormat;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 <#list importList as i>
 import ${i!};
@@ -32,6 +31,19 @@ public class Req${ClassName}AddDto {
     <#else>
         <#if field.formRequired>
     @ApiModelProperty(required = true)
+        </#if>
+    </#if>
+    <#if field.fieldType == 'date'>
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    </#if>
+    <#if field.fieldType == 'datetime'>
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    </#if>
+    <#if field.formRequired?? && field.formRequired>
+        <#if field.attrType == 'String'>
+    @NotBlank(message = "${field.fieldComment}不能为空")
+        <#else>
+    @NotNull(message = "${field.fieldComment}不能为空")
         </#if>
     </#if>
     private ${field.attrType} ${field.attrName};

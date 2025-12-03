@@ -3,6 +3,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import javax.validation.constraints.NotNull;
 <#list importList as i>
 import ${i!};
 </#list>
@@ -19,6 +20,7 @@ import ${i!};
 public class Req${ClassName}IdDto {
 
     @ApiModelProperty(value =  "主键")
-    private Long Id;
+    @NotNull(message = "id不能为空")
+    private Long id;
 
 }
